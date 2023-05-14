@@ -5,6 +5,7 @@ spring:
     password: dev2022
 
   jpa:
-    ddl-auto: update
+    hibernate:
+      ddl-auto: update
 
   show-sql: true

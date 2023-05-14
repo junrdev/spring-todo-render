@@ -9,3 +9,19 @@ spring:
       ddl-auto: update
 
   show-sql: true
+
+
+#  postgres
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://<host>:<port>/<database>
+#    username: dev
+#    password: NVBAcWW2ZTrOTKX7Br6gn4kIdaMCPWxP
+#spring.datasource.driver-class-name=org.postgresql.Driver
+
+
+#  postgres://dev:NVBAcWW2ZTrOTKX7Br6gn4kIdaMCPWxP@dpg-chgn21u7avjbbjop62m0-a:
+#    oregon-postgres:
+#      render:
+#        com/todorender_yubb:
+

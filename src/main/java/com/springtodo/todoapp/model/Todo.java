@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "todos")
 public class Todo {
 
     @SequenceGenerator(name = "todo_seq", allocationSize = 1, sequenceName = "todo_seq")

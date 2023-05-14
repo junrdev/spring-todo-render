@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class TodoRepoTests {
@@ -25,12 +26,76 @@ public class TodoRepoTests {
 
 
     @Test
-    void contextLoads(){}
+    void contextLoads() {
+    }
 
     @Test
-    void getAllTodos(){
+    void getAllTodos() {
         List<Todo> todos = todoRepo.findAll();
 
-        LOGGER.info("Todos : {}",todos);
+        LOGGER.info("Todos : {}", todos);
+    }
+
+    @Test
+    void createTodo() {
+        Todo todo = Todo.builder()
+                .title("First Todo")
+                .content("Hello world")
+                .isDone(false)
+                .build();
+
+        LOGGER.info("Saved Todo : {} ", todoRepo.save(todo));
+    }
+
+    @Test
+    void updateStatus() {
+        Optional<Todo> optionalTodo = todoRepo.findById(1l);
+
+        if (optionalTodo.isEmpty())
+            LOGGER.error("Todo with id : 1 not found");
+        else {
+
+            Todo update = optionalTodo.get();
+            update.setIsDone(!update.getIsDone());
+
+            LOGGER.info("Updated todo {}", todoRepo.save(update));
+        }
+    }
+
+    @Test
+    void getTodoById() {
+        Optional<Todo> optionalTodo = todoRepo.findById(1l);
+
+        if (optionalTodo.isEmpty())
+            LOGGER.error("Todo with id : 1 not found");
+        else {
+            LOGGER.info("Todo 1 : {}", optionalTodo.get());
+        }
+    }
+
+    @Test
+    void getTodosByStatus(){
+        Boolean status = true;
+
+        List<Todo> todos = todoRepo.getTodosByStatus(status);
+
+        LOGGER.info("Todos with status "+status+" :{}", todos);
+    }
+    @Test
+    void deleteTodo() {
+        Optional<Todo> optionalTodo = todoRepo.findById(1l);
+
+        if (optionalTodo.isEmpty())
+            LOGGER.error("Todo with id : 1 not found");
+        else {
+            todoRepo.delete(optionalTodo.get());
+            LOGGER.info("Todo with id 1 deleted");
+        }
+    }
+
+    @Test
+    void deleteTodos() {
+            todoRepo.deleteAll();
+            LOGGER.info("All Todos deleted");
     }
 }

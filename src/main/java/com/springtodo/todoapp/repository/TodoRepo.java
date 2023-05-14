@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TodoRepo extends JpaRepository<Todo, Long> {
 
-    @Query(value = "select * from todo n where is_done =:status", nativeQuery = true)
+    @Query(value = "select * from todos n where is_done =:status", nativeQuery = true)
     List<Todo> getTodosByStatus(Boolean status);
 }
